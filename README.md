@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Graphickiller Website
 
-## Getting Started
+Official website for **Graphickiller**, a creative design studio specializing in visual branding and graphic design services for businesses and organizations.
 
-First, run the development server:
+Our mission is to help clients build a strong and memorable brand identity through creative, modern, and impactful designs.
+
+---
+
+## 🎯 About the Project
+
+This project is built using **Next.js** to provide a fast, responsive, and SEO-friendly website for Graphickiller.
+
+The website showcases the studio's portfolio, services, and contact information while making it easy for potential clients to learn more about our work and request design services.
+
+Our primary target clients include:
+
+- 🏨 Hotels
+- 🏡 Villas
+- 🛍️ UMKM (Small & Medium Enterprises)
+- 🍽️ Restaurants & Cafés
+- 🏢 Corporate Businesses
+- 🚀 Startups
+- 🎉 Events & Communities
+- 👤 Personal Brands
+
+---
+
+## ✨ Services
+
+Graphickiller offers a variety of creative services, including:
+
+- Logo Design
+- Brand Identity Design
+- Social Media Design
+- Marketing Materials
+- Company Profile Design
+- Poster & Flyer Design
+- Menu Design
+- Packaging Design
+- Business Card Design
+- Banner & Signage Design
+- Merchandise Design
+- Custom Graphic Design
+
+---
+
+## 🚀 Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- ESLint
+
+---
+
+## 📦 Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn
+```
+
+or
+
+```bash
+pnpm install
+```
+
+or
+
+```bash
+bun install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+components/
+public/
+styles/
+lib/
+hooks/
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> The project follows the Next.js App Router architecture.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎨 Design Philosophy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Graphickiller focuses on creating designs that are:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Clean
+- Modern
+- Professional
+- Memorable
+- Brand-focused
+- User-centered
+
+Every design aims to communicate the client's identity while increasing brand recognition and trust.
+
+---
+
+## 📞 Contact
+
+For business inquiries or collaborations, please contact Graphickiller through the contact page available on this website.
+
+---
+
+## 📄 License
+
+This project is proprietary and intended for Graphickiller's official website.
+Unauthorized copying, modification, or distribution is prohibited unless permitted by the project owner.
