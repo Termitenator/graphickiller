@@ -1,11 +1,12 @@
 import Button from "@/component/ui/Button";
 import AnimateIn from "@/component/ui/Animation/AnimatedIn";
+import AmbientBackground from "@/component/ui/AmbientBackground";
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center pt-[90px] z-10 overflow-hidden">
+    <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center px-6 text-center pt-[90px] z-10">
+      <AmbientBackground />
       <AnimateIn direction="up" stagger={0.12}>
-        {/* 1. SUB-HEADLINE (Garis diperpendek di mobile agar teks bisa lebih lega) */}
         <div
           data-animated="sub"
           className="flex items-center justify-center gap-2 md:gap-4 mb-8">
@@ -28,15 +29,12 @@ export default function HeroSection() {
           <div
             data-animated="victim-text"
             className="
-              text-5xl md:text-7xl lg:text-[90px] font-extrabold tracking-tight md:tracking-tighter leading-[1.1] md:leading-[1.05] font-neue mt-1 md:mt-2
-              
-              /* --- EFEK OUTLINE GLASS TEXT --- */
-              text-transparent bg-clip-text 
-              bg-white/0 
-              [-webkit-text-stroke:1px_rgba(255,255,255,0.4)]
-              drop-shadow-[0_8px_16px_rgba(255,255,255,0.1)]
-              backdrop-blur-sm
-            ">
+    text-5xl md:text-7xl lg:text-[90px] font-extrabold tracking-tight md:tracking-tighter leading-[1.1] md:leading-[1.05] font-neue mt-1 md:mt-2
+    text-transparent bg-clip-text 
+    bg-white/0 
+    [-webkit-text-stroke:1px_rgba(255,255,255,0.55)]
+    drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]
+  ">
             Kebiasaan Biasa-Biasa Saja
           </div>
         </div>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #000000;
   --foreground: #171717;
 }
 
@@ -24,6 +24,9 @@ body {
   --animate-float-a: float-a 28s ease-in-out infinite;
   --animate-float-b: float-b 34s ease-in-out infinite;
   --animate-float-c: float-c 22s ease-in-out infinite;
+
+  --animate-marquee-left: marquee-left 35s linear infinite;
+  --animate-marquee-right: marquee-right 35s linear infinite;
 
   @keyframes float-a {
     0%,
@@ -55,6 +58,24 @@ body {
     }
     50% {
       transform: translate(-48%, 5%) scale(1.15);
+    }
+  }
+
+  @keyframes marquee-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
     }
   }
 }
