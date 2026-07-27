@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: ReactNode;
   href?: string;
   variant?: "solid" | "outline";
   className?: string;

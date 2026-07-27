@@ -10,6 +10,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-neue-montreal);
+  --font-neue: var(--font-neue-montreal);
 }
 
 body {
