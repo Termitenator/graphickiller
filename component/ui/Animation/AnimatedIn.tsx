@@ -78,19 +78,29 @@ export default function AnimateIn({
         ...offset,
         willChange: "transform, opacity",
       });
+      console.log("enterAnim called");
 
       // 2. Animasi Masuk (Tampil)
-      const enterAnim = () =>
-        gsap.to(targets, {
-          opacity: 1,
-          x: 0,
-          y: 0,
-          duration,
-          stagger,
-          delay,
-          ease: "power3.out",
-          overwrite: "auto",
-        });
+      const enterAnim = () => console.log("enterAnim called");
+      return gsap.to(targets, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        duration,
+        stagger,
+        ease: "power3.out",
+        onComplete() {
+          targets.forEach((el) => {
+            console.log(
+              el.dataset.animated,
+              "opacity:",
+              gsap.getProperty(el, "opacity"),
+              "y:",
+              gsap.getProperty(el, "y"),
+            );
+          });
+        },
+      });
 
       // 3. Animasi Keluar/Reverse (Menghilang)
       const leaveAnim = () =>
@@ -137,6 +147,10 @@ export default function AnimateIn({
           });
         }
       }
+      //   targets.forEach((el) => {
+      //     console.log(el.dataset.animated, el.tagName, el.className);
+      //   });
+      //   console.log("Targets : ", targets);
     }, container);
 
     // Refresh ScrollTrigger sesudah DOM dimuat sempurna untuk akurasi posisi

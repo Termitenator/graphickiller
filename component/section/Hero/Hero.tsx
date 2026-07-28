@@ -9,7 +9,11 @@ export default function HeroSection() {
       <AnimateIn direction="up" stagger={0.12} scrollTriggered={true}>
         <div
           data-animated="sub"
-          className="flex items-center justify-center gap-2 md:gap-4 mb-8">
+          className="
+        relative
+        z-[100]
+        flex
+        items-center justify-center gap-2 md:gap-4 mb-8">
           <div className="w-6 md:w-12 h-[1px] bg-white/30"></div>
           <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-white/80 font-neue">
             Studio Desain Grafis & Produksi

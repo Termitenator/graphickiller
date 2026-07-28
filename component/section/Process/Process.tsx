@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import AnimateIn from "@/component/ui/Animation/AnimatedIn";
 import ProcessLineReveal from "@/component/ui/Animation/ProcessLineReveal";
+import MobileProcessTimeline from "@/component/ui/Animation/MobileProcessTimeline";
 import ProcessStep from "@/component/ui/ProcessStep";
 
 const PROCESS_DATA = [
@@ -90,17 +91,16 @@ export default function ProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-20 w-full h-screen text-white flex items-center px-6">
+      className="relative z-20 w-full min-h-screen md:h-screen text-white flex items-center px-6 py-20 md:py-0">
       <div className="max-w-7xl mx-auto w-full">
-        {/* HEADER SECTION */}
         <AnimateIn
           direction="up"
           stagger={0.1}
           scrollTriggered={true}
           className="w-full"
           disableScrollReverse={true}>
-          <div data-animated className="mb-20">
-            <h2 className="text-5xl md:text-7xl font-extrabold font-neue tracking-tighter leading-none">
+          <div data-animated className="mb-14 md:mb-20">
+            <h2 className="text-4xl md:text-7xl font-extrabold font-neue tracking-tighter leading-none">
               Proses
               <br />
               <span className="text-white/40">Metodologi</span>
@@ -108,20 +108,18 @@ export default function ProcessSection() {
           </div>
         </AnimateIn>
 
-        {/* GRID STEPS + LINE ANIMATION (terpisah penuh) */}
-        <div className="relative">
+        {/* DESKTOP — pinned scrub timeline, horizontal */}
+        <div className="relative hidden md:block">
           <ProcessLineReveal
             sectionRef={sectionRef}
             gridRef={gridRef}
             totalSteps={PROCESS_DATA.length}
           />
-
-          <div
-            ref={gridRef}
-            className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-4 relative z-10">
+          <div ref={gridRef} className="grid grid-cols-4 gap-4 relative z-10">
             {PROCESS_DATA.map((step, index) => (
               <ProcessStep
                 key={step.id}
+                variant="desktop"
                 stepIndex={index + 1}
                 number={step.id}
                 title={step.title}
@@ -131,6 +129,9 @@ export default function ProcessSection() {
             ))}
           </div>
         </div>
+
+        {/* MOBILE — vertical journey timeline, natural scroll */}
+        <MobileProcessTimeline steps={PROCESS_DATA} />
       </div>
     </section>
   );

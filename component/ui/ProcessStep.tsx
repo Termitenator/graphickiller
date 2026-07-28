@@ -6,6 +6,7 @@ interface ProcessStepProps {
   description: string;
   icon: React.ReactNode;
   stepIndex: number;
+  variant?: "desktop" | "mobile";
 }
 
 export default function ProcessStep({
@@ -14,27 +15,77 @@ export default function ProcessStep({
   description,
   icon,
   stepIndex,
+  variant = "desktop",
 }: ProcessStepProps) {
   const isFirst = stepIndex === 1;
+
+  if (variant === "mobile") {
+    return (
+      <div data-step={stepIndex} className="flex items-start gap-5 w-full">
+        <div className="relative shrink-0">
+          <div
+            data-part="ring"
+            className="absolute -inset-2 rounded-full pointer-events-none"
+            style={{
+              opacity: 0,
+              background:
+                "radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 70%)",
+              filter: "blur(3px)",
+            }}
+          />
+          <div
+            data-part="circle"
+            className="relative w-14 h-14 rounded-full flex items-center justify-center"
+            style={{
+              backgroundColor: "#1a1a1a",
+              transform: "scale(0.85)",
+              boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.12)",
+            }}>
+            <div data-part="icon" className="w-6 h-6 text-black">
+              {icon}
+            </div>
+            <div
+              data-part="badge"
+              className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold font-neue bg-black text-white/50"
+              style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
+              {number}
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-2">
+          <h3
+            data-part="title"
+            className="text-lg font-bold text-white font-neue mb-1"
+            style={{ opacity: 0 }}>
+            {title}
+          </h3>
+          <p
+            data-part="desc"
+            className="text-sm text-white/60 font-neue leading-relaxed"
+            style={{ opacity: 0 }}>
+            {description}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       data-step={stepIndex}
       className="flex flex-col items-center text-center relative">
-      {/* Ring glow — radial, lebih soft & "hidup" dibanding box-shadow biasa */}
-      {/* Ring glow — soft blurred light, no hard edge */}
       <div
         data-part="ring"
-        className="absolute w-24 h-24 md:w-28 md:h-28 rounded-full pointer-events-none"
+        className="absolute w-36 h-36 md:w-40 md:h-40 rounded-full pointer-events-none"
         style={{
           opacity: isFirst ? 1 : 0,
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0) 75%)",
-          filter: "blur(8px)",
+            "radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 70%)",
+          filter: "blur(4px)",
         }}
       />
 
-      {/* Circle icon — subtle border ring + inner shadow biar ada depth */}
       <div
         data-part="circle"
         className="relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center mb-6 bg-white text-black"
@@ -46,7 +97,6 @@ export default function ProcessStep({
         }}>
         <div className="w-8 h-8 md:w-10 md:h-10">{icon}</div>
 
-        {/* Badge nomor — border gradient tipis biar gak flat */}
         <div
           data-part="badge"
           className="absolute -top-1 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold font-neue bg-black text-white"
@@ -58,7 +108,6 @@ export default function ProcessStep({
         </div>
       </div>
 
-      {/* Title */}
       <h3
         data-part="title"
         className="text-xl md:text-2xl font-bold text-white font-neue mb-3"
@@ -69,7 +118,6 @@ export default function ProcessStep({
         {title}
       </h3>
 
-      {/* Description */}
       <p
         data-part="desc"
         className="text-sm md:text-base text-white/60 font-neue leading-relaxed max-w-[250px]"
