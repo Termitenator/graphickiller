@@ -143,17 +143,20 @@ export default function ProcessLineReveal({
 </defs>
 `;
 
+      // Garis putus2 dan garis putih
       svg.innerHTML =
         defs +
         segmentDs
           .map(
             (d, i) => `
-        <path d="${d}" fill="none" stroke="white" stroke-opacity="0.25"
-              stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round" />
-        <path data-segment="${i}" d="${d}" fill="none"
-              stroke="url(#lineGradient)" stroke-width="2.5"
-              stroke-linecap="round" filter="url(#lineGlow)" />
-      `,
+          
+          <path d="${d}" fill="none" stroke="white" stroke-opacity="0.25"
+                stroke-width="4" stroke-dasharray="6 10" stroke-linecap="round" />
+                
+          <path data-segment="${i}" d="${d}" fill="none"
+                stroke="url(#lineGradient)" stroke-width="5"
+                stroke-linecap="round" filter="url(#lineGlow)" />
+        `,
           )
           .join("");
 
