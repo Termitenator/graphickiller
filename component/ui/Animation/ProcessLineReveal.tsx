@@ -60,25 +60,36 @@ export default function ProcessLineReveal({
     return centers.slice(0, -1).map((p0, i) => {
       const p1 = centers[i + 1];
       const dx = p1.x - p0.x;
-      const amplitude = 16; // ketinggian gelombang
-      const cycles = 2; // jumlah naik-turun per segmen
-      const segments = cycles * 2;
 
-      let d = `M ${p0.x} ${p0.y}`;
-      for (let s = 0; s < segments; s++) {
-        const t0 = s / segments;
-        const t1 = (s + 1) / segments;
-        const x0 = p0.x + dx * t0;
-        const x1 = p0.x + dx * t1;
-        const yBase0 = p0.y + (p1.y - p0.y) * t0;
-        const yBase1 = p0.y + (p1.y - p0.y) * t1;
-        // arah gelombang selang-seling naik/turun tiap sub-segmen
-        const dir = s % 2 === 0 ? -1 : 1;
-        const cx = (x0 + x1) / 2;
-        const cy = (yBase0 + yBase1) / 2 + dir * amplitude;
-        d += ` Q ${cx} ${cy}, ${x1} ${yBase1}`;
-      }
-      return d;
+      // Penentu arah awal gelombang
+      const dir = i % 2 === 0 ? -1 : 1;
+      const amplitude = 125;
+
+      // 1. Tentukan Titik Tengah persis di antara p0 dan p1
+      const midX = p0.x + dx * 0.5;
+      const midY = p0.y + (p1.y - p0.y) * 0.5;
+
+      /* 2. Sesuaikan Panjang Tuas (Control Point)
+         Karena jarak kurvanya sekarang dibagi dua (p0 ke mid, lalu mid ke p1),
+         angka rasio emas 0.36 kita kalikan setengah (dx * 0.5 * 0.36 = dx * 0.18).
+      */
+      const cpX = dx * 0.18;
+
+      return `
+        M ${p0.x} ${p0.y}
+
+       
+        C
+          ${p0.x + cpX} ${p0.y + amplitude * dir},
+          ${midX - cpX} ${midY + amplitude * dir},
+          ${midX} ${midY}
+
+        
+        C
+          ${midX + cpX} ${midY + amplitude * -dir},
+          ${p1.x - cpX} ${p1.y + amplitude * -dir},
+          ${p1.x} ${p1.y}
+      `;
     });
   }, [gridRef]);
 
@@ -94,20 +105,42 @@ export default function ProcessLineReveal({
       const segmentDs = buildSegmentPaths();
 
       const defs = `
-  <defs>
-    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.4" />
-    </linearGradient>
-    <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2.5" result="blur" />
+<defs>
+
+  <linearGradient
+      id="lineGradient"
+      x1="0%"
+      y1="0%"
+      x2="100%"
+      y2="0%">
+
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="25%" stop-color="#f5f5f5" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="75%" stop-color="#f5f5f5" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15"/>
+
+  </linearGradient>
+
+  <filter
+      id="lineGlow"
+      x="-50%"
+      y="-50%"
+      width="200%"
+      height="200%">
+
+      <feGaussianBlur
+          stdDeviation="3.5"
+          result="blur"/>
+
       <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
       </feMerge>
-    </filter>
-  </defs>
+
+  </filter>
+
+</defs>
 `;
 
       svg.innerHTML =
