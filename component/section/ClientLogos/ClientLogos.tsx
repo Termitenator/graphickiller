@@ -12,9 +12,9 @@ const logosRow2 = [...logosRow1].reverse();
 
 export default function ClientLogos() {
   return (
-    <section className="relative z-20 w-full py-20 overflow-hidden flex flex-col gap-8 md:gap-12">
+    <section className="relative z-20 w-full py-20 flex flex-col gap-8 md:gap-12">
       <AnimateIn direction="up" stagger={0.15} scrollTriggered={true}>
-        <div className="flex w-full overflow-hidden">
+        <div className="flex w-full">
           <div className="flex w-max animate-marquee-left items-center">
             {[...logosRow1, ...logosRow1].map((logo, index) => (
               <div
@@ -28,7 +28,7 @@ export default function ClientLogos() {
           </div>
         </div>
 
-        <div className="flex w-full overflow-hidden">
+        <div className="flex w-full">
           <div className="flex w-max animate-marquee-right items-center">
             {[...logosRow2, ...logosRow2].map((logo, index) => (
               <div

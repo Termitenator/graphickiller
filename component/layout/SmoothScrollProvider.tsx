@@ -1,0 +1,45 @@
+"use client";
+
+import { useLayoutEffect, useRef } from "react";
+import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function SmoothScrollProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const lenisRef = useRef<Lenis | null>(null);
+
+  useLayoutEffect(() => {
+    const lenis = new Lenis({
+      autoRaf: false, // kita drive manual lewat gsap.ticker
+    });
+    lenisRef.current = lenis;
+
+    // expose ke window buat debugging (opsional, bisa dihapus nanti)
+    // @ts-expect-error debug only
+    window.lenis = lenis;
+
+    // sync: kasih tau ScrollTrigger tiap kali Lenis update posisi scroll
+    lenis.on("scroll", ScrollTrigger.update);
+
+    // drive Lenis dari GSAP ticker (biar 1 render loop, gak dobel rAF)
+    const raf = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  return <>{children}</>;
+}
