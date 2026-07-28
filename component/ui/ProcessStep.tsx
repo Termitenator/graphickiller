@@ -77,25 +77,31 @@ export default function ProcessStep({
       className="flex flex-col items-center text-center relative">
       <div
         data-part="ring"
-        className="absolute w-36 h-36 md:w-40 md:h-40 rounded-full pointer-events-none"
+        className="absolute w-32 h-32 md:w-36 md:h-36 rounded-full pointer-events-none"
         style={{
           opacity: isFirst ? 1 : 0,
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 70%)",
-          filter: "blur(4px)",
+            "radial-gradient(circle, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 65%)",
+          filter: "blur(3px)",
         }}
       />
 
+      {/* Circle icon — solid background, opacity di-drive lewat warna, bukan div opacity */}
       <div
         data-part="circle"
-        className="relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center mb-6 bg-white text-black"
+        className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center mb-6"
         style={{
-          opacity: isFirst ? 1 : 0.28,
+          backgroundColor: isFirst ? "#ffffff" : "#3a3a3a",
           transform: isFirst ? "scale(1)" : "scale(0.8)",
           boxShadow:
             "inset 0 -4px 10px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.35)",
         }}>
-        <div className="w-8 h-8 md:w-10 md:h-10">{icon}</div>
+        <div
+          data-part="icon"
+          className="w-8 h-8 md:w-10 md:h-10"
+          style={{ color: isFirst ? "#000000" : "#000000" }}>
+          {icon}
+        </div>
 
         <div
           data-part="badge"

@@ -94,33 +94,33 @@ export default function ProcessLineReveal({
       const segmentDs = buildSegmentPaths();
 
       const defs = `
-      <defs>
-        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
-          <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0.4" />
-        </linearGradient>
-        <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-    `;
+  <defs>
+    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.4" />
+    </linearGradient>
+    <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+`;
 
       svg.innerHTML =
         defs +
         segmentDs
           .map(
             (d, i) => `
-            <path d="${d}" fill="none" stroke="white" stroke-opacity="0.12"
-                  stroke-width="1.5" stroke-dasharray="3 8" stroke-linecap="round" />
-            <path data-segment="${i}" d="${d}" fill="none"
-                  stroke="url(#lineGradient)" stroke-width="2"
-                  stroke-linecap="round" filter="url(#lineGlow)" />
-          `,
+        <path d="${d}" fill="none" stroke="white" stroke-opacity="0.25"
+              stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round" />
+        <path data-segment="${i}" d="${d}" fill="none"
+              stroke="url(#lineGradient)" stroke-width="2.5"
+              stroke-linecap="round" filter="url(#lineGlow)" />
+      `,
           )
           .join("");
 
@@ -134,7 +134,10 @@ export default function ProcessLineReveal({
       });
 
       for (let s = 2; s <= totalSteps; s++) {
-        gsap.set(getPart(s, "circle"), { scale: 0.8, opacity: 0.28 });
+        gsap.set(getPart(s, "circle"), {
+          scale: 0.8,
+          backgroundColor: "#3a3a3a",
+        });
         gsap.set(getPart(s, "title"), { y: 16, opacity: 0 });
         gsap.set(getPart(s, "desc"), { opacity: 0 });
         gsap.set(getPart(s, "ring"), { opacity: 0 });
@@ -160,17 +163,22 @@ export default function ProcessLineReveal({
         tl.to(segPath, { strokeDashoffset: 0, ease: "none", duration: 1 })
           .to(
             getPart(prevStepNumber, "ring"),
-            { opacity: 0, duration: 0.25, ease: "power2.out" },
-            "<0.55",
+            { opacity: 0, duration: 0.2, ease: "power2.out" },
+            "<0.3",
           )
           .to(
             getPart(prevStepNumber, "circle"),
-            { opacity: 0.85, duration: 0.3, ease: "power2.out" },
+            { backgroundColor: "#5a5a5a", duration: 0.3, ease: "power2.out" }, // completed: sedikit lebih terang dari upcoming
             "<",
           )
           .to(
             getPart(stepNumber, "circle"),
-            { scale: 1, opacity: 1, duration: 0.7, ease: "power4.out" },
+            {
+              scale: 1,
+              backgroundColor: "#ffffff",
+              duration: 0.7,
+              ease: "power4.out",
+            },
             "<0.15",
           )
           .to(
@@ -211,7 +219,7 @@ export default function ProcessLineReveal({
   return (
     <svg
       ref={svgRef}
-      className="absolute top-10 left-0 w-full h-12 hidden md:block z-0 pointer-events-none overflow-visible"
+      className="absolute top-10 left-0 w-full h-12 hidden md:block z-[5] pointer-events-none overflow-visible"
       preserveAspectRatio="none"
     />
   );
