@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center px-6 text-center pt-[90px] z-10">
       <AmbientBackground />
-      <AnimateIn direction="up" stagger={0.12}>
+      <AnimateIn direction="up" stagger={0.12} scrollTriggered={true}>
         <div
           data-animated="sub"
           className="flex items-center justify-center gap-2 md:gap-4 mb-8">
