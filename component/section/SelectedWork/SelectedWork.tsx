@@ -4,7 +4,8 @@ import { useState } from "react";
 import Button from "@/component/ui/Button";
 import AnimateIn from "@/component/ui/Animation/AnimatedIn";
 import ProjectCard from "@/component/ui/ProjectCard";
-import PortfolioFilter from "@/component/ui/Filter"; // Import komponen filternya
+import PortfolioFilter from "@/component/ui/Filter";
+import AmbientBackground from "@/component/ui/AmbientBackground";
 
 const PROJECTS = [
   {
@@ -39,7 +40,11 @@ export default function PortfolioSection() {
   const [activeCategory, setActiveCategory] = useState("Semua");
 
   return (
-    <section className="relative z-20 w-full text-white py-24 md:py-32 px-6">
+    <section className="relative z-20 w-full text-white py-20 px-6">
+      <AmbientBackground
+        className="-top-32 md:-top-110 -bottom-24 md:-bottom-40"
+        imageUrl="/background/background-ambient.jpeg"
+      />
       <div className="max-w-7xl mx-auto">
         {/* HEADER & FILTER */}
         <AnimateIn

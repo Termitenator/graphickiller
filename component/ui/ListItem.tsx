@@ -23,7 +23,7 @@ export default function ListItem({
       <div className="md:col-span-2">
         <AnimatedNumber
           value={number}
-          className="text-4xl md:text-5xl font-light text-white/20 font-neue tracking-tighter transition-colors duration-500 group-hover:text-white/40 tabular-nums"
+          className="text-4xl md:text-5xl font-light text-[#8B8B8B] font-neue tracking-tighter transition-colors duration-500 group-hover:text-[#E5E5E5] tabular-nums"
         />
       </div>
 

@@ -30,7 +30,7 @@ const SERVICES_DATA = [
 
 export default function ServicesSection() {
   return (
-    <section className="relative z-20 w-full text-white py-24 md:py-32 px-6">
+    <section className="relative z-50 w-full text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
         {/* HEADER SECTION */}
         <AnimateIn

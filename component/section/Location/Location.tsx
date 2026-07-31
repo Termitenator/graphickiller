@@ -1,10 +1,19 @@
 import AnimateIn from "@/component/ui/Animation/AnimatedIn";
 import MapDisplay from "@/component/ui/MapDisplay";
-import Button from "@/component/ui/Button"; // Import UI Button milikmu
+import Button from "@/component/ui/Button";
+import AmbientBackground from "@/component/ui/AmbientBackground"; // Pastikan path import sesuai
 
 export default function LocationSection() {
   return (
-    <section className="relative z-20 w-full text-white py-24 md:py-32 px-6">
+    // Tag section harus tetap "relative" dan bebas dari "overflow-hidden"
+    <section className="relative z-20 w-full text-white py-20 px-6">
+      {/* 
+        AMBIENT BACKGROUND
+        Menggunakan top-0 agar rata dengan batas atas section ini.
+        Menggunakan -bottom-24 md:-bottom-40 agar menembus ke section bawahnya.
+      */}
+      <AmbientBackground className="top-0 -bottom-24 md:-bottom-40" />
+
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* SISI KIRI: Teks Informasi */}
@@ -41,14 +50,14 @@ export default function LocationSection() {
                 <p className="text-base md:text-lg text-white/60 font-neue leading-relaxed">
                   Senin - Jumat: 09:00 - 18:00
                   <br />
-                  Sabtu: By Appointment
+                  Sabtu : By Appointment
                 </p>
               </div>
 
               {/* MENGGUNAKAN KOMPONEN BUTTON */}
               <div data-animated>
                 <Button
-                  href="https://maps.google.com"
+                  href="https://www.google.com/maps/place/Gg.+XXVII,+Sesetan,+Denpasar+Selatan,+Kota+Denpasar,+Bali+80225/@-8.6895082,115.2207528,1000m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2dd240e2a392eaf3:0xcb936ef34601aea!8m2!3d-8.6895082!4d115.2233331!16s%2Fg%2F11cs4204n5?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D"
                   className="!px-0 !py-0 !h-auto !bg-transparent text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-white border-b border-white !rounded-none pb-1 hover:text-white/60 hover:border-white/60 transition-colors font-neue inline-block w-fit">
                   Get Directions
                 </Button>

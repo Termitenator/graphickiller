@@ -1,3 +1,10 @@
+import React from "react";
+
+interface AmbientBackgroundProps {
+  className?: string;
+  imageUrl?: string;
+}
+
 const GRAIN_SVG = `
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
   <filter id="n">
@@ -9,24 +16,29 @@ const GRAIN_SVG = `
 `;
 const GRAIN_DATA_URI = `url("data:image/svg+xml,${encodeURIComponent(GRAIN_SVG)}")`;
 
-export default function AmbientBackground() {
+export default function AmbientBackground({
+  className = "-top-32 md:-top-48 -bottom-24 md:-bottom-40",
+  imageUrl = "/background/background-ambient.jpeg",
+}: AmbientBackgroundProps) {
   return (
-    // top-0 + bottom negatif = boleh "nembus" ke bawah section, tapi tetap overflow-hidden
-    // di sini saja (bukan di parent section) supaya blur/grain nggak bocor ke seluruh page.
     <div
-      className="absolute inset-x-0 top-0 -bottom-24 md:-bottom-40 -z-10 overflow-hidden bg-[#050505]"
+      className={`absolute inset-x-0 -z-10 overflow-hidden bg-[#050505] ${className}`}
+      style={{
+        isolation: "isolate",
+        contain: "paint",
+        transform: "translateZ(0)",
+      }}
       aria-hidden="true">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-40 transform-gpu max-md:blur-2xl"
+        className="absolute inset-0 bg-cover bg-center opacity-40 transform-gpu blur-3xl scale-110"
         style={{
-          backgroundImage: "url('/background/background-ambient.jpeg')",
+          backgroundImage: `url('${imageUrl}')`,
           filter: "brightness(1.05) saturate(1.2) contrast(1.05)",
         }}
       />
+      <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-xl backdrop-saturate-150" />
 
-      <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-2xl backdrop-saturate-150 transform-gpu" />
-
-      {/* SCRIM RADIAL — kunci utama supaya teks tetap kebaca apapun kondisi gambarnya */}
+      {/* SCRIM RADIAL */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -43,11 +55,18 @@ export default function AmbientBackground() {
         }}
       />
 
-      {/* FADE ATAS */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/80 via-black/40 to-transparent" />
+      {/* 
+        PERUBAHAN 3: FADE ATAS
+        Diganti dari "black" menjadi "#050505" agar match dengan background section lain.
+        Tingginya ditambah menjadi h-48 md:h-64 agar transisinya lebih panjang.
+      */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-48 md:h-64 bg-gradient-to-b from-[#050505] via-[#050505]/60 to-transparent" />
 
-      {/* FADE BAWAH — dipanjangin biar transisi ke section berikutnya halus & sedikit bleed */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 md:h-72 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
+      {/* 
+        PERUBAHAN 4: FADE BAWAH
+        Sama seperti atas, dibuat lebih tinggi (h-64 md:h-80) dan dipastikan mulainya dari solid #050505.
+      */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 md:h-80 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
     </div>
   );
 }
