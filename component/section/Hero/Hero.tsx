@@ -4,7 +4,7 @@ import AmbientBackground from "@/component/ui/AmbientBackground";
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full min-h-[95vh] flex flex-col items-center justify-center px-6 text-center pt-[140px] md:pt-[160px] lg:pt-[90px] z-10">
+    <section className="relative w-full min-h-[95vh] flex flex-col items-center justify-center px-6 text-center pt-20 md:pt-[160px] lg:pt-[90px] z-10">
       <AmbientBackground />
       <AnimateIn direction="up" stagger={0.12} scrollTriggered={true}>
         <div

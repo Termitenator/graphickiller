@@ -12,7 +12,7 @@ const logosRow2 = [...logosRow1].reverse();
 
 export default function ClientLogos() {
   return (
-    <section className="relative z-20 w-full py-20 flex flex-col gap-8 md:gap-12">
+    <section className="relative z-20 w-full flex flex-col gap-8 md:gap-12">
       <AnimateIn direction="up" stagger={0.15} scrollTriggered={true}>
         <div className="flex w-full">
           <div className="flex w-max animate-marquee-left items-center">

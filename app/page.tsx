@@ -5,6 +5,7 @@ import SelectedWork from "@/component/section/SelectedWork/SelectedWork";
 import ProcessSection from "@/component/section/Process/Process";
 import LocationSection from "@/component/section/Location/Location";
 import TestimonialSection from "@/component/section/Testimonials/Testimonials";
+import ContactSection from "@/component/section/CTA/CTA";
 export default function Home() {
   return (
     <section className="relative overflow-hidden">
@@ -15,6 +16,7 @@ export default function Home() {
       <ProcessSection />
       <LocationSection />
       <TestimonialSection />
+      <ContactSection />
     </section>
   );
 }
